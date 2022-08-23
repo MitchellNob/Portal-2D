@@ -6,18 +6,14 @@ var Max_Sprintspeed = 300
 var acceleration = 1
 var move_direction = Vector2(0,0)
 
-var anim_direction = "W"
-var anim_mode = "idle"
-var animation
+onready var anim_sprite = $AnimatedSprite
+
 
 func _physics_process(delta):
-	 Movement(delta)
-
-func _process(delta):
+	Movement(delta)
 	Animation()
 
 func Movement(delta):
-	rotation = 
 	move_direction.x = int(Input.is_action_pressed("Right")) - int(Input.is_action_pressed("Left"))
 	move_direction.y = int(Input.is_action_pressed("Down")) - int(Input.is_action_pressed("Up"))
 	if move_direction == Vector2(0,0):
@@ -35,27 +31,21 @@ func Movement(delta):
 		move_and_slide(motion)
 
 func Animation():
+	print_debug("HEllo")
 	match move_direction:
 		Vector2(-1, 0):
-			anim_direction = "A"
+			print_debug("Work")
+			anim_sprite = "Left"
 		Vector2(1, 0):
-			anim_direction = "D"
-		Vector2(0, 0.5):
-			anim_direction = "S"
-		Vector2(0, -0.5):
-			anim_direction = "W"
+			anim_sprite = "Right"
 		Vector2(-1, -0.5):
-			anim_direction = "WA"
+			anim_sprite = "Left"
 		Vector2(-1, 0.5):
-			anim_direction = "SA"
+			anim_sprite = "Left"
 		Vector2(1, -0.5):
-			anim_direction = "WD"
+			anim_sprite = "Right"
 		Vector2(-1, -0.5):
-			anim_direction = "SD"
+			anim_sprite = "Right"
 
-	if move_direction != Vector2(0, 0):
-		anim_mode = "Walk"
-	else:
-		anim_mode = "Idle"
-	animation = anim_mode + "_" + anim_direction
-	get_node("AnimationPlayer").play(animation)
+	if move_direction == Vector2(0, 0):
+		anim_sprite = "Idle"
