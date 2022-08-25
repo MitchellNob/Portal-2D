@@ -11,7 +11,7 @@ onready var anim_sprite = $AnimatedSprite
 
 func _physics_process(delta):
 	Movement(delta)
-	Animation()
+	Animation(delta) 
 
 func Movement(delta):
 	move_direction.x = int(Input.is_action_pressed("Right")) - int(Input.is_action_pressed("Left"))
@@ -30,22 +30,32 @@ func Movement(delta):
 		var motion = move_direction.normalized() * speed
 		move_and_slide(motion)
 
-func Animation():
-	print_debug("HEllo")
+func Animation(delta):
 	match move_direction:
 		Vector2(-1, 0):
-			print_debug("Work")
-			anim_sprite = "Left"
+			print_debug("Left")
+			anim_sprite.animation = "Left"
 		Vector2(1, 0):
-			anim_sprite = "Right"
+			print_debug("Right")
+			anim_sprite.animation = "Right"
 		Vector2(-1, -0.5):
-			anim_sprite = "Left"
+			print_debug("Left")
+			anim_sprite.animation = "Left"
 		Vector2(-1, 0.5):
-			anim_sprite = "Left"
+			print_debug("Left")
+			anim_sprite.animation = "Left"
 		Vector2(1, -0.5):
-			anim_sprite = "Right"
+			print_debug("Right")
+			anim_sprite.animation = "Right"
 		Vector2(-1, -0.5):
-			anim_sprite = "Right"
-
-	if move_direction == Vector2(0, 0):
-		anim_sprite = "Idle"
+			print_debug("Right")
+			anim_sprite.animation = "Right"
+		Vector2(0, 1):
+			print_debug("walkdown")
+			anim_sprite.animation = "WalkUp"
+		Vector2(0, -1):
+			print_debug("walkup")
+			anim_sprite.animation = "WalkUp"
+		Vector2(0, 0):
+			print_debug("Idle")
+			anim_sprite.animation = "Idle"
