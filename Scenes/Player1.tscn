@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Player1.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Spritesheets/WalkingLeft.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Blue/BlueBullet.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -33,14 +34,20 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
+[sub_resource type="SphereMesh" id=3]
+
+[sub_resource type="CubeMesh" id=4]
+
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 274.761, 137.956 )
+collision_layer = 3
 script = ExtResource( 1 )
+BlueBullet = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( -30.9611, 1.27808 )
+position = Vector2( -30.761, 0.0440063 )
 scale = Vector2( 0.381828, 0.392578 )
-polygon = PoolVector2Array( 5.23796, 17.8308, 9.34552, 85.6302, 63.2076, 89.01, 115.332, 83.9403, 117.07, 24.7935, 120.544, -39.4229, 2.39557, -32.6633 )
+polygon = PoolVector2Array( 5.23796, 17.8308, 9.34552, 85.6302, 63.2076, 89.01, 115.332, 83.9403, 117.07, 24.7935, 130.949, -78.9652, 68.0934, -122.269, -13.0949, -84.0597 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 anim_player = NodePath("../AnimationPlayer")
@@ -48,10 +55,23 @@ anim_player = NodePath("../AnimationPlayer")
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -7.29761, 3.31711 )
 texture = ExtResource( 2 )
-vframes = 4
 hframes = 3
-frame = 2
+vframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 1 )
 anims/WalkLeft = SubResource( 2 )
+
+[node name="Head" type="MeshInstance2D" parent="."]
+position = Vector2( -6.76099, -19.956 )
+scale = Vector2( -28.6256, 27.6525 )
+mesh = SubResource( 3 )
+
+[node name="Gun" type="MeshInstance2D" parent="Head"]
+position = Vector2( -1.15281, -0.0723248 )
+scale = Vector2( 0.793598, -0.16052 )
+mesh = SubResource( 4 )
+
+[node name="EndGun" type="Position2D" parent="Head/Gun"]
+position = Vector2( -1.76078, 9.53674e-06 )
+scale = Vector2( 3759.8, 1.49439 )
