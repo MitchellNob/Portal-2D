@@ -5,6 +5,7 @@ var speed = 0
 var Max_Sprintspeed = 300
 var acceleration = 1
 var move_direction = Vector2(0,0)
+var NoShoot = false
 
 onready var anim_sprite = $AnimationPlayer
 onready var EndGun = $Head/Gun/EndGun
@@ -42,12 +43,13 @@ func Aim(delta):
 		Shoot()
 
 func Shoot():
-	var blue_instance = BlueBullet.instance()
-	get_parent().add_child(blue_instance)
-	blue_instance.global_position = EndGun.global_position
-	print_debug("shoot")
+		if  Global.Shoot == false:
+			Global.Shoot = true
+			var blue_instance = BlueBullet.instance()
+			get_parent().add_child(blue_instance)
+			blue_instance.global_position = EndGun.global_position
 	
-	blue_instance.velocity = get_global_mouse_position() - blue_instance.position
+			blue_instance.velocity = get_global_mouse_position() - blue_instance.position
 
 ##func Animation(delta):
 #	match move_direction:
