@@ -38,18 +38,17 @@ func Movement(delta):
 
 func Aim(delta):
 	$Head.look_at(get_global_mouse_position())
-	
-	if Input.is_action_just_pressed("PortalBlue"):
+
+	if Input.is_action_just_pressed("PortalBlue") && Global.BluePortal == true:
 		Shoot()
 
 func Shoot():
-		if  Global.Shoot == false:
-			Global.Shoot = true
-			var blue_instance = BlueBullet.instance()
-			get_parent().add_child(blue_instance)
-			blue_instance.global_position = EndGun.global_position
-	
-			blue_instance.velocity = get_global_mouse_position() - blue_instance.position
+	Global.BluePortal = false
+	var blue_instance = BlueBullet.instance()
+	get_parent().add_child(blue_instance)
+	blue_instance.global_position = EndGun.global_position
+
+	blue_instance.velocity = get_global_mouse_position() - blue_instance.position
 
 ##func Animation(delta):
 #	match move_direction:

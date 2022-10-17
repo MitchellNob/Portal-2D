@@ -1,6 +1,6 @@
 extends Node
 
-var Shoot = false
+var BluePortal = true
 
 func _ready():
 	pass # Replace with function body.
