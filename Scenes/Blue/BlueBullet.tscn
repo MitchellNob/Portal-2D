@@ -56,7 +56,7 @@ blue_portal = ExtResource( 2 )
 scale = Vector2( 0.99241, 0.938277 )
 frames = SubResource( 11 )
 animation = "Bullets"
-frame = 2
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
