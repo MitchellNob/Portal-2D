@@ -1,78 +1,83 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/Game/Player1.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Spritesheets/WalkingLeft.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Blue/BlueBullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Orange/OrangeBullet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Orange/OrangePortal.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Blue/BluePortal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Sprites/Spritesheets/BluePlayer.png" type="Texture" id=7]
 
+[sub_resource type="CircleShape2D" id=22]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Idle"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
+[sub_resource type="CircleShape2D" id=23]
 
-[sub_resource type="Animation" id=2]
-resource_name = "WalkLeft"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2 ]
-}
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="SphereMesh" id=3]
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 7 )
+region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="CubeMesh" id=4]
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 7 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 7 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 7 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 7 )
+region = Rect2( 64, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 7 )
+region = Rect2( 128, 128, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=31]
+animations = [ {
+"frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 274.761, 137.956 )
 collision_layer = 3
 script = ExtResource( 1 )
 BlueBullet = ExtResource( 3 )
+OrangeBullet = ExtResource( 4 )
+BPortal = ExtResource( 6 )
+OPortal = ExtResource( 5 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( -30.761, 0.0440063 )
-scale = Vector2( 0.381828, 0.392578 )
-polygon = PoolVector2Array( 5.23796, 17.8308, 9.34552, 85.6302, 63.2076, 89.01, 115.332, 83.9403, 117.07, 24.7935, 130.949, -78.9652, 68.0934, -122.269, -13.0949, -84.0597 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 2.94036, 2.68705 )
+shape = SubResource( 22 )
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-anim_player = NodePath("../AnimationPlayer")
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 0, -1.52588e-05 )
+scale = Vector2( 1.00179, 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -7.29761, 3.31711 )
-texture = ExtResource( 2 )
-vframes = 4
-hframes = 3
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -0.6203, 1.63321 )
+scale = Vector2( 3.35793, 3.1002 )
+shape = SubResource( 23 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Idle = SubResource( 1 )
-anims/WalkLeft = SubResource( 2 )
+[node name="Head" type="AnimatedSprite" parent="."]
+position = Vector2( 4.24261, 0 )
+frames = SubResource( 31 )
+frame = 2
+playing = true
 
-[node name="Head" type="MeshInstance2D" parent="."]
-position = Vector2( -6.76099, -19.956 )
-scale = Vector2( -28.6256, 27.6525 )
-mesh = SubResource( 3 )
+[node name="EndGun" type="Position2D" parent="Head"]
+position = Vector2( 39.5812, 0.561737 )
+rotation = 3.14159
+scale = Vector2( 85412.2, 6.63327 )
 
-[node name="Gun" type="MeshInstance2D" parent="Head"]
-position = Vector2( -1.15281, -0.0723248 )
-scale = Vector2( 0.793598, -0.16052 )
-mesh = SubResource( 4 )
-
-[node name="EndGun" type="Position2D" parent="Head/Gun"]
-position = Vector2( -1.76078, 9.53674e-06 )
-scale = Vector2( 3759.8, 1.49439 )
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

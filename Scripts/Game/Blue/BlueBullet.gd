@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var velocity = Vector2.ZERO
-export var speed = 400
+export var speed = 700
 var Shooting = false
 
 onready var BlueBullet = $"."
@@ -18,8 +18,16 @@ func set_direction(direction: Vector2):
 	self.direction = direction
 
 func Portal(delta):
-		var Portal = blue_portal.instance()
-		get_parent().add_child(Portal)
-		Portal.global_position = BlueBullet.global_position
+		var BPortal = blue_portal.instance()
+		get_parent().add_child(BPortal)
+		BPortal.global_position = BlueBullet.global_position
 		Global.BluePortal = true
+		Global.BlueShot = false
 	
+func _on_Area2D_area_entered(area):
+	if area.is_in_group("OrangePortal"):
+		queue_free()
+		Global.BlueShot = false
+	if area.is_in_group("DeadWall"):
+		queue_free()
+		Global.BlueShot = false

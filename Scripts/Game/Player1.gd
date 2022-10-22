@@ -10,15 +10,19 @@ var Max_Sprintspeed = 300
 var acceleration = 1
 #This is the direction that we will be moving in it is (0,0) or .ZERO
 var move_direction = Vector2(0,0)
-
+#This variable determines if the character can teleport
+var CanTeloport = true
 #Here I call upon different Nodes within my scene so that and turn the into a variable
 #so I can use them later on
 onready var anim_sprite = $AnimationPlayer
-onready var EndGun = $Head/Gun/EndGun
+onready var EndGun = $Head/EndGun
 
 #A packed scene is a simplified way of calling for a scene I can go into the inspector
 #and assign the scene to the variable
 export (PackedScene) var BlueBullet
+export (PackedScene) var OrangeBullet
+export (PackedScene) var BPortal
+export (PackedScene) var OPortal
 
 #The start function can only run as the script is called, the _phyiscs_process function
 #is by default run 60 times every second, this means that physics mechanics, such as 
@@ -74,13 +78,15 @@ func Aim(delta):
 #here we have an if statement that waits for the left mouse button to be pressed
 #however using && we set another paremeter that needs to be met before this if
 #statement can work, our global variable BluePortal has to be equal to true
-	if Input.is_action_just_pressed("PortalBlue") && Global.BluePortal == true:
+	if Input.is_action_just_pressed("BluePortal") && Global.BluePortal == true && Global.BlueShot == false:
 #if the if the statement parameters are met than call upon the Shoot() function
-		Shoot()
+		ShootBlue()
+		Global.BlueShot = true
+	if Input.is_action_just_pressed("OrangePortal") && Global.OrangePortal == true && Global.OrangeShot == false:
+		ShootOrange()
+		Global.OrangeShot = true
 
-func Shoot():
-	#We firstly set the global variable BluePortal to false
-	Global.BluePortal = false
+func ShootBlue():
 #We create a new variable and call upon the packed scene variable we created earlier,
 #the instance function that we use allows us to instantiate the BlueBullet scene into
 #the current scene, basically copying all of the configuration from the BlueBullet
@@ -93,8 +99,58 @@ func Shoot():
 #instantiated at the transfrom2D position
 	blue_instance.global_position = EndGun.global_position
 
-#we than give the bullet velocity towards the 
+#we than give the bullet velocity towards the global mouse positin, however if we
+#don't minus the blue_instances position from the global_mouse_position than the
+#bullet will go in the wrong direction
 	blue_instance.velocity = get_global_mouse_position() - blue_instance.position
+
+func ShootOrange():
+	#Here we are doing the same thing as the ShootBlue function however for the
+	#orange portal
+	var orange_instance = OrangeBullet.instance()
+	get_parent().add_child(orange_instance)
+	orange_instance.global_position = EndGun.global_position
+	
+	orange_instance.velocity = get_global_mouse_position() - orange_instance.position
+
+func _on_Area2D_area_entered(area):
+	if CanTeloport && area.is_in_group("BluePortal"):
+		TeleportToOrange()
+		CanTeloport = false
+		yield(get_tree().create_timer(.5), "timeout")
+		CanTeloport = true
+
+	if CanTeloport && area.is_in_group("OrangePortal"):
+		TeleportToBlue()
+		CanTeloport = false
+		yield(get_tree().create_timer(.5), "timeout")
+		CanTeloport = true
+	
+	if area.is_in_group("Poison"):
+		Kill()
+
+func TeleportToOrange():
+	for OPortal in get_tree().get_nodes_in_group("OrangePortal"):
+		global_position = OPortal.global_position
+	
+#	var ExitSpeed = max(abs(move_direction.x), abs(move_direction.y))
+#	move_direction = Vector2()
+	#var dir = OrangePortal.point.glob_position - OrangePortal.global_position
+	#apply_central_impulse(dir * ExitSpeed)
+
+func TeleportToBlue():
+	for BPortal in get_tree().get_nodes_in_group("BluePortal"):
+		global_position = BPortal.global_position
+	
+	yield(get_tree().create_timer(.1), "timeout")
+	
+	var ExitSpeed = max(abs(move_direction.x), abs(move_direction.y))
+	move_direction = Vector2()
+	#var dir = OrangePortal.point.glob_position - OrangePortal.global_position
+	#apply_central_impulse(dir * ExitSpeed)
+
+func Kill():
+	queue_free()
 
 ##func Animation(delta):
 #	match move_direction:
