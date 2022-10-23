@@ -23,6 +23,7 @@ export (PackedScene) var BlueBullet
 export (PackedScene) var OrangeBullet
 export (PackedScene) var BPortal
 export (PackedScene) var OPortal
+export (PackedScene) var Cube
 
 #The start function can only run as the script is called, the _phyiscs_process function
 #is by default run 60 times every second, this means that physics mechanics, such as 
@@ -30,9 +31,16 @@ export (PackedScene) var OPortal
 func _physics_process(delta):
 #Here we call the movement, animation and aim function as they all need to be 
 #processed 
-	Movement(delta)
+	if Global.Paused == false:
+		Movement(delta)
 #Animation(delta) 
-	Aim(delta)
+		Aim(delta)
+
+	if Input.is_action_just_pressed("Space") && Global.CompanionCube == true:
+		CompanionCube()
+
+	if Global.Health <= 0:
+		Kill()
 
 func Movement(delta):
 #move_direction is the vector we set before, here we are assigning the x axis of the vector by 
@@ -68,6 +76,7 @@ func Movement(delta):
 #move and slide function directly influences our motion variable
 	move_and_slide(motion)
 
+
 func Aim(delta):
 	#this is an inbuilt function within godot, first we get the node that we want to rotate
 	#which in this case is the Head, than we simply state the look_at() function, within 
@@ -77,14 +86,15 @@ func Aim(delta):
 
 #here we have an if statement that waits for the left mouse button to be pressed
 #however using && we set another paremeter that needs to be met before this if
-#statement can work, our global variable BluePortal has to be equal to true
-	if Input.is_action_just_pressed("BluePortal") && Global.BluePortal == true && Global.BlueShot == false:
+#statement can work, our global variable BlueShot has to be equal to false
+	if Input.is_action_just_pressed("BluePortal") && Global.BlueShot == false:
 #if the if the statement parameters are met than call upon the Shoot() function
 		ShootBlue()
 		Global.BlueShot = true
-	if Input.is_action_just_pressed("OrangePortal") && Global.OrangePortal == true && Global.OrangeShot == false:
+	if Input.is_action_just_pressed("OrangePortal") && Global.OrangeShot == false:
 		ShootOrange()
 		Global.OrangeShot = true
+
 
 func ShootBlue():
 #We create a new variable and call upon the packed scene variable we created earlier,
@@ -95,14 +105,15 @@ func ShootBlue():
 #We than add the child as a child of our root node for the scene
 	get_parent().add_child(blue_instance)
 #We want the bullet to spawn at the tip of the gun so we get the EndGun variable
-#that is linked to a transform2D and we set it so that the BlueBullet scene is 
-#instantiated at the transfrom2D position
+#that is linked to a Position2D and we set it so that the BlueBullet scene is 
+#instantiated at the Position2D position
 	blue_instance.global_position = EndGun.global_position
 
 #we than give the bullet velocity towards the global mouse positin, however if we
 #don't minus the blue_instances position from the global_mouse_position than the
 #bullet will go in the wrong direction
 	blue_instance.velocity = get_global_mouse_position() - blue_instance.position
+
 
 func ShootOrange():
 	#Here we are doing the same thing as the ShootBlue function however for the
@@ -112,6 +123,7 @@ func ShootOrange():
 	orange_instance.global_position = EndGun.global_position
 	
 	orange_instance.velocity = get_global_mouse_position() - orange_instance.position
+
 
 func _on_Area2D_area_entered(area):
 	if CanTeloport && area.is_in_group("BluePortal"):
@@ -125,32 +137,33 @@ func _on_Area2D_area_entered(area):
 		CanTeloport = false
 		yield(get_tree().create_timer(.5), "timeout")
 		CanTeloport = true
-	
+
 	if area.is_in_group("Poison"):
 		Kill()
+
 
 func TeleportToOrange():
 	for OPortal in get_tree().get_nodes_in_group("OrangePortal"):
 		global_position = OPortal.global_position
-	
-#	var ExitSpeed = max(abs(move_direction.x), abs(move_direction.y))
-#	move_direction = Vector2()
-	#var dir = OrangePortal.point.glob_position - OrangePortal.global_position
-	#apply_central_impulse(dir * ExitSpeed)
+
 
 func TeleportToBlue():
 	for BPortal in get_tree().get_nodes_in_group("BluePortal"):
 		global_position = BPortal.global_position
-	
-	yield(get_tree().create_timer(.1), "timeout")
-	
-	var ExitSpeed = max(abs(move_direction.x), abs(move_direction.y))
-	move_direction = Vector2()
-	#var dir = OrangePortal.point.glob_position - OrangePortal.global_position
-	#apply_central_impulse(dir * ExitSpeed)
+
+
+func CompanionCube():
+	var cube_instance = Cube.instance()
+	get_parent().add_child(cube_instance)
+	cube_instance.global_position = EndGun.global_position
+	Global.CompanionCube = false
+
 
 func Kill():
-	queue_free()
+	Global.Key = false
+	Global.CompanionCube = false
+	Global.Health = 100
+	position = Vector2(-26, 535)
 
 ##func Animation(delta):
 #	match move_direction:

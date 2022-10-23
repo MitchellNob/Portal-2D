@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/scifi.mp3-7328ac6c68f8fc721d7940c2f0a0973a.mp3str"
+
+[deps]
+
+source_file="res://Audio/scifi.mp3"
+dest_files=[ "res://.import/scifi.mp3-7328ac6c68f8fc721d7940c2f0a0973a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -9,5 +9,17 @@ var OrangePortal = true
 var BlueShot = false
 var OrangeShot = false
 
-func _ready():
-	pass # Replace with function body.
+var CompanionCube = false
+
+var PressurePlate = false
+
+var Key = false
+
+var Health = 100
+
+var Paused = false
+
+#func _process(delta):
+#	if Paused == true:
+#		get_tree().paused != get_tree().paused
+		

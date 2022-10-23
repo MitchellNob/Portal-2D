@@ -14,15 +14,12 @@ func _physics_process(delta):
 		Portal(delta)
 		queue_free()
 
-func set_direction(direction: Vector2):
-	self.direction = direction
-
 func Portal(delta):
-		var BPortal = blue_portal.instance()
-		get_parent().add_child(BPortal)
-		BPortal.global_position = BlueBullet.global_position
-		Global.BluePortal = true
-		Global.BlueShot = false
+	var BPortal = blue_portal.instance()
+	get_parent().add_child(BPortal)
+	BPortal.global_position = BlueBullet.global_position
+	Global.BluePortal = true
+	Global.BlueShot = false
 	
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("OrangePortal"):
