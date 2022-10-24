@@ -1,5 +1,7 @@
 extends Area2D
 
+#This variable just gets the node BluePos from our scene, this node is a Position2D
+#so it holds a Vector2D x and y value
 onready var BluePos = $BluePos
 
 #here we call the _physics_process again

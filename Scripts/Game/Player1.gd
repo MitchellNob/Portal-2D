@@ -146,7 +146,7 @@ func _on_Area2D_area_entered(area):
 #We set the canTeleport to true, so that the player can teleport again.
 		CanTeloport = true
 
-#Here we basically have the same thing however, we make it so that it can =
+#Here we basically have the same thing however, we make it so that it can
 #teleport to the blue portal.
 	if CanTeloport && area.is_in_group("OrangePortal"):
 		TeleportToBlue()
@@ -154,33 +154,60 @@ func _on_Area2D_area_entered(area):
 		yield(get_tree().create_timer(.5), "timeout")
 		CanTeloport = true
 
+#If the Player is touching the area with the group Poision, kill the player.
 	if area.is_in_group("Poison"):
 		Kill()
 
-
+#Here we have a function that is triggered when the Player enters the Blue Portals
+#area.
 func TeleportToOrange():
+#the function for_in allows us to search through a range or array (in this case
+#a group), if there is a node in the group "OrangePortal", it then stores the
+#node in the variable OPortal.
 	for OPortal in get_tree().get_nodes_in_group("OrangePortal"):
+#It then sets the Players position to that of the variable OPortal
 		global_position = OPortal.global_position
 
-
+#This is basically the same as the code above however this is for teleporting
+#to the blue portal.
 func TeleportToBlue():
 	for BPortal in get_tree().get_nodes_in_group("BluePortal"):
 		global_position = BPortal.global_position
 
-
+#Here we have the companion cube function that is called when we press space
+#and the global variable CompanionCube is equal to true.
 func CompanionCube():
+#We do the same thing that we do when we are instancing a bullet, however this time
+#we are instaning the CompanionCube and not the bullet.
 	var cube_instance = Cube.instance()
 	get_parent().add_child(cube_instance)
 	cube_instance.global_position = EndGun.global_position
+#Here we state that the Global variable CompanionCube is equal to false, so the
+#player no longer holds the companion cube.
 	Global.CompanionCube = false
 
-
+#This function is called when the players health is equal to zero.
 func Kill():
+#We first reset the Key, CompanionCube and Health global back to their original
+#values
 	Global.Key = false
 	Global.CompanionCube = false
 	Global.Health = 100
+#We than set the players position back to the spawn, when we add more levels
+#this will have to change however for now simply setting the position to a fixed
+#location will do.
 	position = Vector2(-26, 535)
 
+#We than need to instance the companion cube so we reuse the script used for 
+#instancing the cube at the guns position and make it so that the position of
+#the instanced cube is a set position on the map
+	var cube_instance = Cube.instance()
+	get_parent().add_child(cube_instance)
+	cube_instance.global_position = Vector2(771.477, -395.263)
+
+#I also kept the animation function here just in case I intend on updating the
+#animations, it is also a proof of concept and with a few tweaks to the code
+#will work.
 ##func Animation(delta):
 #	match move_direction:
 #		Vector2( -1, 0 )

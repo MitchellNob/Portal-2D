@@ -3,7 +3,7 @@ extends Node2D
 onready var ElevatorDoor = $KinematicBody2D2/CollisionShape2D
 onready var Greetings = get_node("Tutorial/Greetings/Text")
 onready var Greetings2 = get_node("Tutorial/Greetings/Text2")
-onready var Key = get_node("Tutorial/Key/Text")
+onready var ElevatorKey = get_node("Tutorial/Key/Text")
 onready var Turret = get_node("Tutorial/Turret/Text")
 onready var CompanionCube = get_node("Tutorial/CompanionCube/Text")
 onready var PressurePlate = get_node("Tutorial/PressurePlate/Text")
@@ -64,12 +64,12 @@ func _on_Turret_button_down():
 #For Key
 func _on_Key_area_entered(area):
 	if area.is_in_group("Player1")  && KeyPanel == true:
-		Key.visible = true
+		ElevatorKey.visible = true
 		Global.Paused = true
 
 #For Key
 func _on_Key_button_down():
-	Key.visible = false
+	ElevatorKey.visible = false
 	Global.Paused = false
 	KeyPanel = false
 

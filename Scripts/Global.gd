@@ -19,7 +19,4 @@ var Health = 100
 
 var Paused = false
 
-#func _process(delta):
-#	if Paused == true:
-#		get_tree().paused != get_tree().paused
 		
