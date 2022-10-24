@@ -3,8 +3,8 @@
 [ext_resource path="res://Sprites/Spritesheets/Wall_Tileset.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Spritesheets/Floor_Tileset.png" type="Texture" id=2]
 [ext_resource path="res://Animations/PoisonAnim.tres" type="Texture" id=3]
-[ext_resource path="res://Scenes/Player1.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scripts/LevelOne.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Game/Player1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/Levels/LevelOne.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Game/CompanionCube.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Game/PressurePlate.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Game/Turret.tscn" type="PackedScene" id=9]
@@ -637,7 +637,7 @@ position = Vector2( 887.241, -264.285 )
 position = Vector2( -32.0918, 613.518 )
 scale = Vector2( 0.524762, 0.507862 )
 frames = SubResource( 31 )
-frame = 9
+frame = 5
 playing = true
 
 [node name="Node2D" parent="." instance=ExtResource( 12 )]

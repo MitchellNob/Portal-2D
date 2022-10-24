@@ -5,8 +5,13 @@ extends KinematicBody2D
 var velocity = Vector2.ZERO
 #This is the speed at which the bullet will travel
 export var speed = 700
+#This is a boolean variable that we set to tell the script whether we are shooting
+#or not
 var Shooting = false
 
+#This variable just stores the root node that the script is attached to
+#, we use the onready function because we want it to be stored when the script
+#is called however we don't have a ready function.
 onready var BlueBullet = $"."
 
 export (PackedScene) var blue_portal
