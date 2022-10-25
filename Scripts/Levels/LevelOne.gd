@@ -33,7 +33,7 @@ func _process(delta):
 
 func _on_Elevator_area_entered(area):
 	if area.is_in_group("Player1") && Global.Key == true:
-		get_tree().change_scene("res://Scenes/MainMenu.tscn")
+		get_tree().change_scene("res://Scenes/Menu/MainMenu.tscn")
 		Global.Key = false
 		Global.CompanionCube = false
 		Global.Health = 100

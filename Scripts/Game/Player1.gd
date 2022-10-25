@@ -193,6 +193,7 @@ func Kill():
 	Global.Key = false
 	Global.CompanionCube = false
 	Global.Health = 100
+	Global.KillCube = true
 #We than set the players position back to the spawn, when we add more levels
 #this will have to change however for now simply setting the position to a fixed
 #location will do.
@@ -204,6 +205,7 @@ func Kill():
 	var cube_instance = Cube.instance()
 	get_parent().add_child(cube_instance)
 	cube_instance.global_position = Vector2(771.477, -395.263)
+	
 
 #I also kept the animation function here just in case I intend on updating the
 #animations, it is also a proof of concept and with a few tweaks to the code

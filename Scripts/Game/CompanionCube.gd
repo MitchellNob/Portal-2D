@@ -13,6 +13,12 @@ func _process(delta):
 		queue_free()
 		Global.CompanionCube = true
 
+#If the Global variable KillCube is equal to true, we destroy this node and set 
+#the variable back to false.
+	if Global.KillCube == true:
+		queue_free()
+		Global.KillCube = false
+
 #Another area2D using the inbuilt signal function to determine if another area
 #other than it's own has entered its vicinity.
 func _on_Area2D_area_entered(area): 

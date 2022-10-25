@@ -19,3 +19,5 @@ var Key = false
 var Health = 100
 
 var Paused = false
+
+var KillCube = false

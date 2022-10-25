@@ -14,6 +14,8 @@ var Shooting = false
 #is called however we don't have a ready function.
 onready var BlueBullet = $"."
 
+#This is a PackedScene that we export to the Inspector so that we can select the
+#scene that we wish to use, we than set the selected scene as a variable.
 export (PackedScene) var blue_portal
 
 #The start function can only run as the script is called, the _phyiscs_process function

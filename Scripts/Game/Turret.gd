@@ -38,16 +38,27 @@ func Shoot():
 #If the raycast is colliding with something than we get what it is colliding with
 #and if it is in the group "Player1" we instance a bullet.
 		if rayCast.get_collider().is_in_group("Player1"):
-
+#We create a new variable and create the instance within the variable.
 			var Bullet = BulletScene.instance()
+#We than add this instanced Bullet the parent of the scene
 			get_parent().add_child(Bullet)
+#We than set the instanced Bullet to the end of the players character
 			Bullet.global_position = Barrel.global_position
+#We also set the rotation of the bullet to the turrets rotatin however, this
+#will set it to the wrong rotation so we need to add an extra 90 degrees
 			Bullet.rotation_degrees = turret.rotation_degrees + 90
+#We tgeb call on the MoveSetup function from the script that the Bullet scene
+#within that we set a value within the function, this value gets the position
+#at which the raycast collided with something and then minuses it by the position 
+#of the node that this script is attached to.
 			Bullet.MoveSetup(rayCast.get_collision_point() - position)
+#We then set the CanShoot function to false so that it can no longer shoot and 
+#we call the BulletTimer() function
 			CanShoot = false
 			BulletTimer()
 
-
+#In this BulletTimer function we create a timer that lasts for 0.5 seconds, after 
+#the 0.5 seconds is up we set the CanShoot variable to true.
 func BulletTimer():
 	yield(get_tree().create_timer(.5), "timeout")
 	CanShoot = true
