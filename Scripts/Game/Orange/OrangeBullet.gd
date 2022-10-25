@@ -32,4 +32,4 @@ func _on_Area2D_area_entered(area):
 		queue_free()
 		Global.OrangeShot = false
 
-#####REFER TO BlueBullet FOR EXPLENATION OF CODE######
+#####REFER TO BlueBullet FOR EXPLANATION OF CODE######

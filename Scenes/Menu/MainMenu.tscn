@@ -72,7 +72,7 @@ script = ExtResource( 3 )
 position = Vector2( 317.333, 121.621 )
 scale = Vector2( 0.810957, 0.870218 )
 frames = SubResource( 13 )
-frame = 11
+frame = 8
 playing = true
 
 [node name="Buttons" type="VBoxContainer" parent="."]

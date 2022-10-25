@@ -7,7 +7,7 @@ var Enabled = false
 #node to the variable Anim.
 onready var Anim = get_node("AnimatedSprite")
 
-#In this process function we have an if function that checks to see if the Global
+#In this process function we have an if statement that checks to see if the Global
 #variable PressurePlate is equal to true. If it is than we play the Enabled() function.
 func _process(delta):
 	if Global.PressurePlate == true:

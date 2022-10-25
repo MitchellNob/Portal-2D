@@ -637,7 +637,7 @@ position = Vector2( 887.241, -264.285 )
 position = Vector2( -32.0918, 613.518 )
 scale = Vector2( 0.524762, 0.507862 )
 frames = SubResource( 31 )
-frame = 5
+frame = 9
 playing = true
 
 [node name="Node2D" parent="." instance=ExtResource( 12 )]
