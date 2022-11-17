@@ -148,14 +148,14 @@ func _on_Area2D_area_entered(area):
 
 #Here we basically have the same thing however, we make it so that it can
 #teleport to the blue portal.
-	if CanTeloport && area.is_in_group("OrangePortal"):
+	elif CanTeloport && area.is_in_group("OrangePortal"):
 		TeleportToBlue()
 		CanTeloport = false
 		yield(get_tree().create_timer(.5), "timeout")
 		CanTeloport = true
 
 #If the Player is touching the area with the group Poision, kill the player.
-	if area.is_in_group("Poison"):
+	elif area.is_in_group("Poison"):
 		Kill()
 
 #Here we have a function that is triggered when the Player enters the Blue Portals
@@ -239,3 +239,4 @@ func Kill():
 #		Vector2( 0, 0 )
 #			print_debug("Idle")
 #		s	anim_sprite.animation = "Idle"
+

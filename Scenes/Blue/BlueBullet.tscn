@@ -53,19 +53,21 @@ script = ExtResource( 1 )
 blue_portal = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.99241, 0.938277 )
 frames = SubResource( 9 )
 animation = "Bullets"
 frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -2, 0 )
+scale = Vector2( -0.120262, -0.157915 )
 shape = SubResource( 10 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Object_Collision" type="Area2D" parent="."]
+scale = Vector2( 0.629617, 0.651597 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2( 4.93417, 4.73311 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Object_Collision"]
+scale = Vector2( 6.54276, 5.93016 )
 shape = SubResource( 11 )
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Object_Collision" to="." method="_on_Area2D_area_entered"]

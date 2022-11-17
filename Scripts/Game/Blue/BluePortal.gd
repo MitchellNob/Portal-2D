@@ -14,3 +14,5 @@ func _physics_process(delta):
 		queue_free()
 #We than set the variable to true.
 		Global.BluePortal = true
+
+

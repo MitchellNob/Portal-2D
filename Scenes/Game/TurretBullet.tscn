@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Game/TurretBullet.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Spritesheets/Turret_Bullet.png" type="Texture" id=2]
@@ -38,26 +38,25 @@ animations = [ {
 
 [sub_resource type="RectangleShape2D" id=7]
 
-[sub_resource type="RectangleShape2D" id=8]
-
 [node name="TurretBullet" type="KinematicBody2D"]
 scale = Vector2( 0.3, 0.3 )
 script = ExtResource( 1 )
-speed = 600
+Speed = 300
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2( 7.92634, 6.38389 )
+scale = Vector2( 3.73985, 3.54738 )
 shape = SubResource( 7 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2( 2.80116, 2.24062 )
-shape = SubResource( 8 )
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

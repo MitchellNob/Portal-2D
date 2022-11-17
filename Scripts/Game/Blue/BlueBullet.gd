@@ -49,6 +49,11 @@ func _on_Area2D_area_entered(area):
 	if area.is_in_group("OrangePortal"):
 		queue_free()
 		Global.BlueShot = false
-	if area.is_in_group("DeadWall"):
+	elif area.is_in_group("DeadWall"):
+		queue_free()
+		Global.BlueShot = false
+
+func _on_Player_Collision_area_entered(area):
+	if area.is_in_group("Player1"):
 		queue_free()
 		Global.BlueShot = false

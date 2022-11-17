@@ -38,9 +38,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Area2D" type="Area2D" groups=[
-"BluePortal",
-]]
+[node name="Area2D" type="Area2D" groups=["BluePortal"]]
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -55,4 +53,7 @@ position = Vector2( 0, 20 )
 rotation = 3.14159
 scale = Vector2( 1.8, 1.5 )
 frames = SubResource( 8 )
+frame = 2
 playing = true
+
+[connection signal="area_entered" from="." to="." method="_on_Area2D_area_entered"]

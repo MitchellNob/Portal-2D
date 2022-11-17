@@ -1,3 +1,223 @@
-[gd_scene format=2]
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Sprites/Spritesheets/Portal2D_TItle.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Menu/LevelSelect.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Level_One.PNG" type="Texture" id=3]
+[ext_resource path="res://Sprites/Level_Two.PNG" type="Texture" id=4]
+[ext_resource path="res://Sprites/Level_Three.PNG" type="Texture" id=5]
+[ext_resource path="res://Sprites/Level_Four.PNG" type="Texture" id=6]
+[ext_resource path="res://Sprites/Level_Five.PNG" type="Texture" id=7]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 704, 80 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 80, 704, 80 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 160, 704, 80 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 240, 704, 80 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 320, 704, 80 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 400, 704, 80 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 480, 704, 80 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 560, 704, 80 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 640, 704, 80 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 720, 704, 80 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 800, 704, 80 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 880, 704, 80 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="LevelSelect" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 317.333, 121.621 )
+scale = Vector2( 0.810957, 0.870218 )
+frames = SubResource( 13 )
+playing = true
+
+[node name="Title" type="AnimatedSprite" parent="."]
+frames = SubResource( 14 )
+
+[node name="LevelSelect_Label" type="Sprite" parent="."]
+
+[node name="Panel1" type="Panel" parent="."]
+margin_left = 188.0
+margin_top = 229.0
+margin_right = 230.0
+margin_bottom = 269.0
+rect_scale = Vector2( 15.4503, 7.14181 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.88985
+margin_top = 13.1619
+margin_right = 7.88985
+margin_bottom = 13.1619
+rect_scale = Vector2( 0.0166372, 0.0221325 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="TextureButton" parent="Panel1/HBoxContainer"]
+margin_right = 600.0
+margin_bottom = 599.0
+texture_normal = ExtResource( 3 )
+
+[node name="Button2" type="TextureButton" parent="Panel1/HBoxContainer"]
+margin_left = 604.0
+margin_right = 1199.0
+margin_bottom = 599.0
+texture_normal = ExtResource( 4 )
+
+[node name="Button3" type="TextureButton" parent="Panel1/HBoxContainer"]
+margin_left = 1203.0
+margin_right = 1797.0
+margin_bottom = 599.0
+texture_normal = ExtResource( 5 )
+
+[node name="Next1" type="Button" parent="Panel1"]
+margin_left = 38.3811
+margin_top = 0.140022
+margin_right = 50.3811
+margin_bottom = 20.14
+rect_scale = Vector2( 0.0828358, 0.2 )
+text = "NEXT"
+
+[node name="Panel2" type="Panel" parent="."]
+visible = false
+margin_left = 188.0
+margin_top = 229.0
+margin_right = 230.0
+margin_bottom = 269.0
+rect_scale = Vector2( 15.4503, 7.14181 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.88985
+margin_top = 13.1619
+margin_right = 567.89
+margin_bottom = 569.162
+rect_scale = Vector2( 0.017, 0.022 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button4" type="TextureButton" parent="Panel2/HBoxContainer"]
+margin_right = 596.0
+margin_bottom = 596.0
+texture_normal = ExtResource( 6 )
+
+[node name="Button5" type="TextureButton" parent="Panel2/HBoxContainer"]
+margin_left = 600.0
+margin_right = 1194.0
+margin_bottom = 596.0
+texture_normal = ExtResource( 7 )
+
+[node name="Button6" type="TextureButton" parent="Panel2/HBoxContainer"]
+margin_left = 1198.0
+margin_right = 1198.0
+margin_bottom = 596.0
+
+[node name="Next2" type="Button" parent="Panel2"]
+margin_left = 38.3811
+margin_top = 0.140022
+margin_right = 50.3811
+margin_bottom = 20.14
+rect_scale = Vector2( 0.0828358, 0.2 )
+text = "NEXT"
+
+[node name="Back2" type="Button" parent="Panel2"]
+margin_right = 12.0
+margin_bottom = 20.0
+rect_scale = Vector2( 0.0870229, 0.182353 )
+text = "BACK"
+
+[node name="Panel3" type="Panel" parent="."]
+visible = false
+margin_left = 188.0
+margin_top = 229.0
+margin_right = 230.0
+margin_bottom = 269.0
+rect_scale = Vector2( 15.4503, 7.14181 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.88985
+margin_top = 13.1619
+margin_right = 7.88985
+margin_bottom = 13.1619
+rect_scale = Vector2( 0.685931, 0.349906 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Back3" type="Button" parent="Panel3"]
+margin_right = 12.0
+margin_bottom = 20.0
+rect_scale = Vector2( 0.0870229, 0.182353 )
+text = "BACK"
+
+[node name="Exit" type="Button" parent="."]
+margin_left = 35.0
+margin_top = 538.0
+margin_right = 47.0
+margin_bottom = 558.0
+rect_scale = Vector2( 1.96998, 1.55429 )
+text = "Exit"
+
+[connection signal="button_down" from="Panel1/HBoxContainer/Button" to="." method="_on_Button_button_down"]
+[connection signal="button_down" from="Panel1/HBoxContainer/Button2" to="." method="_on_Button2_button_down"]
+[connection signal="button_down" from="Panel1/HBoxContainer/Button3" to="." method="_on_Button3_button_down"]
+[connection signal="button_down" from="Panel1/Next1" to="." method="_on_Next_button_down"]
+[connection signal="button_down" from="Panel2/HBoxContainer/Button4" to="." method="_on_Button4_button_down"]
+[connection signal="button_down" from="Panel2/HBoxContainer/Button5" to="." method="_on_Button5_button_down"]
+[connection signal="button_down" from="Panel2/Next2" to="." method="_on_Next2_button_down"]
+[connection signal="button_down" from="Panel2/Back2" to="." method="_on_Back2_button_down"]
+[connection signal="button_down" from="Panel3/Back3" to="." method="_on_Back3_button_down"]
+[connection signal="button_down" from="Exit" to="." method="_on_Exit_button_down"]

@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+##REFER TO "BlueBullet" FOR EXPLANATION OF CODE##
+
 var velocity = Vector2.ZERO
 export var speed = 700
 var Shooting = false
@@ -32,4 +34,4 @@ func _on_Area2D_area_entered(area):
 		queue_free()
 		Global.OrangeShot = false
 
-#####REFER TO BlueBullet FOR EXPLANATION OF CODE######
+

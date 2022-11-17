@@ -73,7 +73,7 @@ script = ExtResource( 3 )
 position = Vector2( 317.333, 121.621 )
 scale = Vector2( 0.810957, 0.870218 )
 frames = SubResource( 13 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="Buttons" type="VBoxContainer" parent="."]
@@ -82,9 +82,6 @@ margin_top = 178.0
 margin_right = 806.0
 margin_bottom = 580.0
 rect_scale = Vector2( 0.3, 0.3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Play" type="TextureButton" parent="Buttons"]
 margin_right = 768.0
@@ -93,7 +90,6 @@ texture_normal = ExtResource( 1 )
 texture_hover = ExtResource( 7 )
 
 [node name="Level_Select" type="TextureButton" parent="Buttons"]
-visible = false
 margin_top = 68.0
 margin_right = 768.0
 margin_bottom = 132.0
@@ -101,13 +97,14 @@ texture_normal = ExtResource( 2 )
 texture_hover = ExtResource( 8 )
 
 [node name="Quit" type="TextureButton" parent="Buttons"]
-margin_top = 68.0
+margin_top = 136.0
 margin_right = 768.0
-margin_bottom = 132.0
+margin_bottom = 200.0
 texture_normal = ExtResource( 6 )
 texture_hover = ExtResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 stream = ExtResource( 9 )
 volume_db = -5.0
 autoplay = true
